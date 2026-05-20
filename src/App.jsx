@@ -30,8 +30,10 @@ export default function App() {
   const [powerUpUsed, setPowerUpUsed] = useState(false)
   const [powerUpActive, setPowerUpActive] = useState(false)
 
+  const safeBoxes = boxes.filter(box => !box.isBomb)
+  const revealedSafeBoxes = safeBoxes.filter(box => box.isRevealed)
   const gameLost = wrongClick >= 3
-  const gameWon = rightClick >= 58
+  const gameWon = revealedSafeBoxes.length === safeBoxes.length
   const gameOver = gameLost || gameWon
 
   function reStart(selectedDifficulty = difficulty){
